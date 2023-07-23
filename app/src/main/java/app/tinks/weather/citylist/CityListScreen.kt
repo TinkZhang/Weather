@@ -9,10 +9,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import app.tinks.weather.AppConfig
 import app.tinks.weather.navigation.navigateToCity
+import app.tinks.weather.network.WeatherApi
 
 @Composable
 fun CityListRoute(
@@ -28,11 +30,14 @@ fun CityListScreen(
 ) {
     Scaffold(topBar = {
         CenterAlignedTopAppBar(title = { Text("City List") })
-    }) {
-        LazyColumn(Modifier.padding(it)) {
-            items(items = AppConfig.cityList) { city ->
+    }) { padding ->
+        LaunchedEffect(key1 = 1) {
+            WeatherApi.getLiveWeather(" ")
+        }
+        LazyColumn(Modifier.padding(padding)) {
+            items(items = AppConfig.cityList, key = { it.cityId }) { city ->
                 Text(
-                    city, modifier = Modifier.clickable { onItemClicked(city) }
+                    city.name, modifier = Modifier.clickable { onItemClicked(city.name) }
                 )
             }
         }
