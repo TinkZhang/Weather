@@ -36,26 +36,26 @@ object WeatherApi {
 
     }
 
-    suspend fun getForecastWeather(city: String): WeatherDto {
-        return service.getForecastWeather("110101")
+    suspend fun getForecastWeather(adCode: String): WeatherDto {
+        return service.getForecastWeather(adCode)
     }
 
-    suspend fun getLiveWeather(city: String): WeatherDto {
-        return service.getLiveWeather("110101")
+    suspend fun getLiveWeather(adCode: String): WeatherDto {
+        return service.getLiveWeather(adCode)
     }
 }
 
 interface WeatherService {
     @GET("v3/weather/weatherInfo")
     suspend fun getForecastWeather(
-        @Query("city") cityId: String,
+        @Query("city") adCode: String,
         @Query("extensions") extensions: String = "all",
         @Query("key") key: String = KEY
     ): WeatherDto
 
     @GET("v3/weather/weatherInfo")
     suspend fun getLiveWeather(
-        @Query("city") cityId: String,
+        @Query("city") adCode: String,
         @Query("extensions") extensions: String = "base",
         @Query("key") key: String = KEY
     ): WeatherDto
