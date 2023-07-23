@@ -21,6 +21,7 @@ data class Live(
     val windpower: String,
     val humidity: String,
     val reporttime: String,
+    val adcode: String,
 )
 
 data class Forecast(

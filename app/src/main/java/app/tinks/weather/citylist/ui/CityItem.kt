@@ -49,7 +49,7 @@ fun CityItem(
             ) {
                 Text(liveWeather.weather, style = MaterialTheme.typography.titleMedium)
                 Text(
-                    "${liveWeather.winddirection} 风 ${liveWeather.windpower} 级",
+                    "${liveWeather.winddirection}风 ${liveWeather.windpower}级",
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text("湿度 ${liveWeather.humidity}%", style = MaterialTheme.typography.titleMedium)

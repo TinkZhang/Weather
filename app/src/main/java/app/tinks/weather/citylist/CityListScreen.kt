@@ -37,7 +37,7 @@ fun CityListScreen(
         viewModel.update()
     }
     Scaffold(topBar = {
-        CenterAlignedTopAppBar(title = { Text(if (uiState.value.isLoading) "Loading" else "City List") })
+        CenterAlignedTopAppBar(title = { Text("城市列表") })
     }) { padding ->
 
         LazyColumn(

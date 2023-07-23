@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.tinks.weather.WeatherRepository
 import app.tinks.weather.model.LiveWeather
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,7 +18,7 @@ class CityListViewModel : ViewModel() {
 
 
     fun update() {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             repository.updateAllLiveWeathers()
             _uiState.value = ListUiState(isLoading = true, liveWeathers = repository.liveWeathers)
         }
