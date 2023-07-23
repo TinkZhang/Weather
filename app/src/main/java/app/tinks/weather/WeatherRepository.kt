@@ -1,6 +1,5 @@
 package app.tinks.weather
 
-import app.tinks.weather.model.City
 import app.tinks.weather.model.ForecastWeather
 import app.tinks.weather.model.LiveWeather
 import app.tinks.weather.model.toForecastWeather
@@ -24,6 +23,7 @@ object WeatherRepository {
             it.adCode to ForecastWeather(it)
         }.toMutableMap()
 
+    fun getForecastWeathers(adCode: String): ForecastWeather = forecastWeathers[adCode]!!
 
     suspend fun updateAllLiveWeathers() {
         withContext(Dispatchers.IO) {
@@ -40,11 +40,10 @@ object WeatherRepository {
                 }
             }
         }
-
     }
 
-    suspend fun updateForecast(city: City) {
-        val result = api.getForecastWeather(city.adCode).toForecastWeather(city)
-        forecastWeathers[city.adCode] = result!!
+    suspend fun updateForecast(adCode: String) {
+        val result = api.getForecastWeather(adCode).toForecastWeather(getCity(adCode))
+        forecastWeathers[adCode] = result
     }
 }

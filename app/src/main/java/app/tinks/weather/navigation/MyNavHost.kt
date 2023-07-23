@@ -42,7 +42,7 @@ fun MyNavHost(
 }
 
 fun NavController.navigateToCity(id: String, navOptions: NavOptions? = null) {
-    this.navigate("$detailRoute/{$id}", navOptions)
+    this.navigate("$detailRoute/$id", navOptions)
 }
 
 

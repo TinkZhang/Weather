@@ -27,7 +27,7 @@ fun CityItem(
     modifier: Modifier = Modifier,
     onItemClick: (String) -> Unit = {}
 ) {
-    OutlinedCard(modifier = modifier, onClick = { onItemClick(liveWeather.city.cityId) }) {
+    OutlinedCard(modifier = modifier, onClick = { onItemClick(liveWeather.city.adCode) }) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
