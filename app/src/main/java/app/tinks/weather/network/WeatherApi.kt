@@ -1,5 +1,6 @@
 package app.tinks.weather.network
 
+import app.tinks.weather.BuildConfig
 import app.tinks.weather.network.dto.WeatherDto
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,7 +16,7 @@ const val KEY = "fec7592471b34f1167d92cc693982c3c"
 object WeatherApi {
     private val client = OkHttpClient.Builder()
         .apply {
-            if (true) {
+            if (BuildConfig.DEBUG) {
                 addInterceptor(HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 })

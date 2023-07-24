@@ -29,17 +29,24 @@ class CityDetailViewModel(
 
 
     fun update() {
+        _uiState.value = _uiState.value.copy(isLoading = true)
         viewModelScope.launch {
-            repository.updateForecast(city.adCode)
-            _uiState.value = DetailUiState(
-                isLoading = true,
-                forecastWeather = repository.getForecastWeathers(city.adCode)
-            )
+            try {
+                repository.updateForecast(city.adCode)
+                _uiState.value = DetailUiState(
+                    isLoading = false,
+                    isError = false,
+                    forecastWeather = repository.getForecastWeathers(city.adCode)
+                )
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(isError = true)
+            }
         }
     }
 }
 
 data class DetailUiState(
     val isLoading: Boolean = false,
+    val isError: Boolean = false,
     val forecastWeather: ForecastWeather
 )

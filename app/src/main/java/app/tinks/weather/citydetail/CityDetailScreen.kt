@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -53,16 +54,28 @@ fun CityDetailScreen(
                 })
         },
     ) { padding ->
-        val casts = uiState.value.forecastWeather.casts
-        LazyColumn(
-            modifier = Modifier
-                .padding(padding)
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            items(items = casts) {
-                DayItem(cast = it, modifier = Modifier.fillMaxWidth())
+        if (uiState.value.isError) {
+            IconButton(
+                onClick = { viewModel.update() },
+                modifier = Modifier
+                    .padding(padding)
+                    .fillMaxWidth(0.8f)
+            ) {
+                Icon(Icons.Default.Refresh, contentDescription = "Retry")
+            }
+        } else {
+            val casts = uiState.value.forecastWeather.casts
+            LazyColumn(
+                modifier = Modifier
+                    .padding(padding)
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                items(items = casts) {
+                    DayItem(cast = it, modifier = Modifier.fillMaxWidth())
+                }
             }
         }
+
     }
 }
